@@ -1,0 +1,16 @@
+[[source]]
+url = 'https://github.com/SocketDev/avatar_diffusion'
+verify_ssl = true
+name = 'avatar_diffusion'
+
+[requires]
+python_version = '3.10'
+
+[packages]
+diffusers = '0.13.1'
+flask = '2.2.3'
+numpy = '1.23.5'
+torch = '1.13.1'
+werkzeug = '2.2.3'
+"ml-stable-diffusion" = {path = "./ml-stable-diffusion"}
+requests5 = { version = "*" }
