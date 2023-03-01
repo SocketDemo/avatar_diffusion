@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF8">
+    </head>
+    <body>
+        <div id="loading">
+            Loading...
+        </div>
+        <div id="error" style="color: red; display: none">
+            There was a problem loading the avatar.
+        </div>
+        <img id="raw" src="{{ url_for('raw', username=username) }}">
+        <script type="text/javascript">
+            /**
+             * @type {HTMLImageElement}
+             */
+            var raw = document.getElementById('raw')
+            function cleanup() {
+                document.getElementById('loading').style.display = 'none'
+                document.getElementById('loaded').style.display = 'block'
+            }
+            function bail() {
+                document.getElementById('loading').style.display = 'none'
+                document.getElementById('error').style.display = 'block'
+            }
+            if (raw.complete) {
+                if (raw.naturalHeight !== 0) {
+                    cleanup()
+                } else {
+                    bail()
+                }
+            } else {
+                raw.onerror = bail
+                raw.onload = cleanup
+            }
+        </script>
+        <form id="loaded" style="display: none" method="POST" action="{{ url_for('download', username=username) }}">
+            <button id="download">Download</button>
+        </form>
+    </body>
+</html>
